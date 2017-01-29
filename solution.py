@@ -81,6 +81,14 @@ def display(values):
     return
 
 def eliminate(values):
+    """
+    Iterates through all the boxes eliminating values that are possible for the box to have.
+    Args:
+        values(dict): a dictionary of the form {'box_name': '123456789', ...}
+
+    Returns:
+        the values dictionary with the non possible values eliminated from the dict.
+    """
     for box in values.keys():
         # Get the values for all the key's peers
         vals = set(values[pb] for pb in peers[box] if len(values[pb]) == 1)
@@ -88,6 +96,14 @@ def eliminate(values):
     return values
 
 def only_choice(values):
+    """
+    If there is only one box in a unit which would allow a certain digit, then assigns to that box the digit.
+    Args:
+        values(dict): a dictionary of the form {'box_name': '123456789', ...}
+
+    Returns:
+        the values dictionary with boxes with unique values assigned to that box.
+    """
     for unit in unitlist:
         for digit in '123456789':
             dplaces = [box for box in unit if digit in values[box]]
